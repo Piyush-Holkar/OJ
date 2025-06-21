@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <h1>Welcome To Dashboard! </h1>
+    <a href="{% url 'profile' user.username %}"><button type="button">Profile</button></a>
+    <a href="{% url 'problems' %}"><button type="button">Problems List</button></a>
+    <a href="{% url 'submissions' %}"><button type="button">Submissions</button></a>
+    <a href="{% url 'create' %}"><button type="button">Create Problem</button></a>
+    <a href="{% url 'logout' %}"><button type="button">Logout</button></a>
+
+</body>
+
+</html>

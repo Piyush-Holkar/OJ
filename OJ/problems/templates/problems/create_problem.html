@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Problem</title>
+</head>
+
+<body>
+    <h1>Create Your Own Problem</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="title">Problem Title:</label><br>
+        <input type="text" name="title" required><br><br>
+
+        <label for="statement">Problem Statement:</label><br>
+        <textarea name="statement" required></textarea><br><br>
+
+        <label for="time_limit">Time Limit (ms):</label><br>
+        <input type="number" name="time_limit" required><br><br>
+
+        <label for="space_limit">Space Limit (MB):</label><br>
+        <input type="number" name="space_limit" required><br><br>
+
+        <label for="tags">Tags (comma-separated):</label><br>
+        <input type="text" name="tags"><br><br>
+
+        <h3>Testcase</h3>
+
+        <label for="input_text">Input:</label><br>
+        <textarea name="input_text" required></textarea><br><br>
+
+        <label for="output_text">Expected Output:</label><br>
+        <textarea name="output_text" required></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

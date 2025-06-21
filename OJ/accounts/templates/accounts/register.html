@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - CodeCosmic</title>
+</head>
+
+<body>
+    <h1>Create New User</h1>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <!-- User fields -->
+        <label for="username">Username:</label>
+        <input type="text" name="username" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password"><br><br>
+
+        <!-- UserExtension fields -->
+        <label for="college">College:</label>
+        <input type="text" name="college" required><br><br>
+
+        <button type="submit">Register</button>
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </form>
+</body>
+
+</html>

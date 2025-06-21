@@ -1,0 +1,21 @@
+# Python related byte-compiled/ cache, logs
+__pycache__/
+*.py[cod]
+
+# Databse
+*.sqlite3
+
+
+# Django
+*.log
+*.pot
+*.pyc
+
+# my vs code settings
+.vscode/
+
+# environment related
+# Environment
+.venv/
+*.env
+

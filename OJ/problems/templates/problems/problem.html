@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ problem.title }}</title>
+</head>
+
+<body>
+    <h1>{{ problem.title }}</h1>
+
+    <p><strong>Author:</strong> {{ problem.author.user.username }}</p>
+    <p><strong>Created At:</strong> {{ problem.created_at }}</p>
+    <p><strong>Tags:</strong> {{ problem.tags }}</p>
+
+    <h2>Problem Statement</h2>
+    <p>{{ problem.statement }}</p>
+
+    <h3>Constraints</h3>
+    <ul>
+        <li><strong>Time Limit:</strong> {{ problem.time_limit }} sec</li>
+        <li><strong>Space Limit:</strong> {{ problem.space_limit }} KB</li>
+    </ul>
+    <h2>Submit Your Code</h2>
+    <form method="POST" action="{% url 'problem' problem.id %}">
+        {% csrf_token %}
+
+        <label for="lang">Language:</label>
+        <select name="lang" required>
+            <option value="cpp">C++</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+        </select><br><br>
+
+        <label for="code">Your Code:</label><br>
+        <textarea name="code" rows="15" cols="80" required></textarea><br><br>
+
+        <button type="submit">Submit Code</button>
+    </form>
+</body>
+
+</html>
