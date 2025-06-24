@@ -11,10 +11,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Custom paths
+RUNTIME_DIR = os.path.join(BASE_DIR, "runtime_files")
+CODES_DIR = os.path.join(RUNTIME_DIR, "codes")
+INPUTS_DIR = os.path.join(RUNTIME_DIR, "inputs")
+OUTPUTS_DIR = os.path.join(RUNTIME_DIR, "outputs")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -41,6 +47,7 @@ INSTALLED_APPS = [
     "core",
     "accounts",
     "problems",
+    "ide",
 ]
 
 MIDDLEWARE = [

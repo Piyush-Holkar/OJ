@@ -6,9 +6,9 @@ from accounts.models import UserExtension
 class Problem(models.Model):
     title = models.CharField(max_length=100)
     statement = models.TextField()
-    time_limit = models.IntegerField()
-    space_limit = models.IntegerField()
-    tags = models.CharField(max_length=100)
+    time_limit = models.IntegerField() # milliseconds
+    space_limit = models.IntegerField() # megabytes
+    tags = models.CharField(max_length=100) # CSV
     author = models.ForeignKey(UserExtension, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 

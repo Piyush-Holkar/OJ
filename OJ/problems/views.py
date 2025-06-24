@@ -5,35 +5,6 @@ from accounts.models import UserExtension
 
 
 # Create your views here.
-def create(request):
-    if request.method == "POST":
-        # problem fields
-        title = request.POST.get("title")
-        statement = request.POST.get("statement")
-        time_limit = request.POST.get("time_limit")
-        space_limit = request.POST.get("space_limit")
-        tags = request.POST.get("tags")
-        input_text = request.POST.get("input_text")
-        output_text = request.POST.get("output_text")
-        user_ext = UserExtension.objects.get(user=request.user)
-        problem = Problem.objects.create(
-            title=title,
-            statement=statement,
-            time_limit=time_limit,
-            space_limit=space_limit,
-            tags=tags,
-            author=user_ext,
-        )
-        TestCase.objects.create(
-            problem=problem,
-            tc_number=1,
-            input_text=input_text,
-            output_text=output_text,
-        )
-        return redirect("problems")
-    return render(request, "problems/create_problem.html")
-
-
 def problems(request):
     problems = Problem.objects.all()
     context = {"problems": problems}
@@ -62,6 +33,35 @@ def problem(request, problem_id):
         "problem": problem,
     }
     return render(request, "problems/problem.html", context)
+
+
+def create(request):
+    if request.method == "POST":
+        # problem fields
+        title = request.POST.get("title")
+        statement = request.POST.get("statement")
+        time_limit = request.POST.get("time_limit")
+        space_limit = request.POST.get("space_limit")
+        tags = request.POST.get("tags")
+        input_text = request.POST.get("input_text")
+        output_text = request.POST.get("output_text")
+        user_ext = UserExtension.objects.get(user=request.user)
+        problem = Problem.objects.create(
+            title=title,
+            statement=statement,
+            time_limit=time_limit,
+            space_limit=space_limit,
+            tags=tags,
+            author=user_ext,
+        )
+        TestCase.objects.create(
+            problem=problem,
+            tc_number=1,
+            input_text=input_text,
+            output_text=output_text,
+        )
+        return redirect("problems")
+    return render(request, "problems/create_problem.html")
 
 
 def submissions(request):
