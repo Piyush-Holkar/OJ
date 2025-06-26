@@ -1,5 +1,3 @@
-from .lang_runners import *
-
 # Maps language codes to file extensions
 extension_map = {
     "cpp": "cpp",
@@ -7,6 +5,8 @@ extension_map = {
     # "java": "java",
     # "c": "c",
 }
+
+from .lang_runners import *
 
 # Maps language codes to their executor functions
 executor_map = {
