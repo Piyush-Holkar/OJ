@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submissions</title>
 </head>
+
 <body>
     <h1>Your Submissions:</h1><br>
     <ul>
         {% for submission in submissions %}
         <li>
             <a href="{% url 'submission' submission.id %}">
-                {{ submission.problem.title }} — {{ submission.lang }} {{ submission.verdict }} ({{ submission.created_at }})
+                {{ submission.problem.title }} — {{ submission.verdict }} (Language-{{ submission.lang }})
+                {{ submission.created_at }}
             </a>
         </li>
         {% endfor %}
     </ul>
 </body>
+
 </html>

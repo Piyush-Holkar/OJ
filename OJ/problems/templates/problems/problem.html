@@ -5,39 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ problem.title }}</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
+            font-family: sans-serif;
+        }
+
+        .left-section {
+            width: 50%;
+        }
+
+        .right-section {
+            width: 50%;
+        }
+
+        textarea {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>{{ problem.title }}</h1>
+    <div class="left-section">
+        <h1>{{ problem.title }}</h1>
 
-    <p><strong>Author:</strong> {{ problem.author.user.username }}</p>
-    <p><strong>Created At:</strong> {{ problem.created_at }}</p>
-    <p><strong>Tags:</strong> {{ problem.tags }}</p>
+        <p><strong>Author:</strong> {{ problem.author.user.username }}</p>
+        <p><strong>Created At:</strong> {{ problem.created_at }}</p>
+        <p><strong>Tags:</strong> {{ problem.tags }}</p>
 
-    <h2>Problem Statement</h2>
-    <p>{{ problem.statement }}</p>
+        <h2>Problem Statement</h2>
+        <pre>{{ problem.statement }}</pre>
 
-    <h3>Constraints</h3>
-    <ul>
-        <li><strong>Time Limit:</strong> {{ problem.time_limit }} sec</li>
-        <li><strong>Space Limit:</strong> {{ problem.space_limit }} KB</li>
-    </ul>
-    <h2>Submit Your Code</h2>
-    <form method="POST" action="{% url 'problem' problem.id %}">
-        {% csrf_token %}
+        <h3>Constraints</h3>
+        <ul>
+            <li><strong>Time Limit:</strong> {{ problem.time_limit }} ms</li>
+            <li><strong>Space Limit:</strong> {{ problem.space_limit }} MB</li>
+        </ul>
+    </div>
 
-        <label for="lang">Language:</label>
-        <select name="lang" required>
-            <option value="cpp">C++</option>
-            <option value="python">Python</option>
-            <option value="java">Java</option>
-        </select><br><br>
+    <div class="right-section">
+        <h2>Submit Your Code</h2>
+        <form method="POST" action="{% url 'problem' problem.id %}">
+            {% csrf_token %}
 
-        <label for="code">Your Code:</label><br>
-        <textarea name="code" rows="15" cols="80" required></textarea><br><br>
+            <label for="lang">Language:</label>
+            <select name="lang" required>
+                <option value="cpp">C++</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+            </select><br><br>
 
-        <button type="submit">Submit Code</button>
-    </form>
+            <label for="code">Your Code:</label><br>
+            <textarea name="code" rows="15" cols="80" required></textarea><br><br>
+
+            <button type="submit">Submit Code</button>
+        </form>
+    </div>
 </body>
 
 </html>

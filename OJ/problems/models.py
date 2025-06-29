@@ -35,4 +35,4 @@ class Submission(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.user.username + " " + self.verdict + " " + self.created_at
+        return self.user.user.username + " " + self.verdict + " " + str(self.created_at)

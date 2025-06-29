@@ -15,10 +15,9 @@ def run_code(
     input_uuid=None,
     output_uuid=None,
     error_uuid=None,
-    time_limit=5000,
-    space_limit=256,
+    time_limit=5000,  # ms
+    space_limit=256,  # MB
 ):
-    extension = extension_map[lang]
     executor = executor_map.get(lang)
 
     code_path = resolve_path("code", code_uuid, lang)

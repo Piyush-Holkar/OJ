@@ -5,39 +5,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Problem</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
+            font-family: sans-serif;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .left-section {
+            width: 60%;
+        }
+
+        .right-section {
+            width: 35%;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+        }
+
+        .testcase {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Create Your Own Problem</h1>
 
     <form method="POST">
         {% csrf_token %}
 
-        <label for="title">Problem Title:</label><br>
-        <input type="text" name="title" required><br><br>
+        <div class="left-section">
+            <h1>Create Your Own Problem</h1>
+            <label for="title">Problem Title:</label><br>
+            <input type="text" name="title" required><br><br>
 
-        <label for="statement">Problem Statement:</label><br>
-        <textarea name="statement" required></textarea><br><br>
+            <label for="statement">Problem Statement:</label><br>
+            <textarea name="statement" required></textarea><br><br>
 
-        <label for="time_limit">Time Limit (ms):</label><br>
-        <input type="number" name="time_limit" required><br><br>
+            <label for="time_limit">Time Limit (ms):</label><br>
+            <input type="number" name="time_limit" required><br><br>
 
-        <label for="space_limit">Space Limit (MB):</label><br>
-        <input type="number" name="space_limit" required><br><br>
+            <label for="space_limit">Space Limit (MB):</label><br>
+            <input type="number" name="space_limit" required><br><br>
 
-        <label for="tags">Tags (comma-separated):</label><br>
-        <input type="text" name="tags"><br><br>
+            <label for="tags">Tags (comma-separated):</label><br>
+            <input type="text" name="tags"><br><br>
 
-        <h3>Testcase</h3>
+            <button type="submit">Submit Problem</button>
+        </div>
 
-        <label for="input_text">Input:</label><br>
-        <textarea name="input_text" required></textarea><br><br>
+        <div class="right-section">
+            <h2>Testcases</h2>
 
-        <label for="output_text">Expected Output:</label><br>
-        <textarea name="output_text" required></textarea><br><br>
+            <div id="testcases">
+                <div class="testcase">
+                    <label>Input:</label><br>
+                    <textarea name="input_text_0" required></textarea><br><br>
+                    <label>Expected Output:</label><br>
+                    <textarea name="output_text_0" required></textarea><br><br>
+                </div>
+            </div>
 
-        <button type="submit">Submit</button>
+            <button type="button" onclick="addTestcase()">Add Testcase</button>
+        </div>
     </form>
+
+    <script>
+        let tc_count = 1;
+
+        function addTestcase() {
+            const container = document.getElementById("testcases");
+
+            const div = document.createElement("div");
+            div.className = "testcase";
+            div.innerHTML = `
+                <label>Input:</label><br>
+                <textarea name="input_text_${tc_count}" required></textarea><br><br>
+                <label>Expected Output:</label><br>
+                <textarea name="output_text_${tc_count}" required></textarea><br><br>
+            `;
+            container.appendChild(div);
+            tc_count++;
+        }
+    </script>
 </body>
 
 </html>

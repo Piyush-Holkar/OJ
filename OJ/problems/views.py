@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
-from .models import Problem, Submission, TestCase
+from .models import *
 from accounts.models import UserExtension
+from ide.utils import resolve_path
+from .judge import judge_submission
+from uuid import uuid4
 
 
 # Create your views here.
@@ -19,20 +21,25 @@ def problem(request, problem_id):
         code = request.POST.get("code")
         lang = request.POST.get("lang")
 
-        submission = Submission.objects.create(
+        code_uuid = uuid4()
+        code_path = resolve_path("code", code_uuid, lang)
+
+        with open(code_path, "w") as code_file:
+            code_file.write(code)
+
+        verdict = judge_submission(problem, lang, code_uuid)
+
+        Submission.objects.create(
             problem=problem,
             user=user_ext,
-            code=code,
+            code_file=code_uuid,
             lang=lang,
-            verdict="Pending",
+            verdict=verdict,
         )
-        submission.save()
+
         return redirect("submissions")
 
-    context = {
-        "problem": problem,
-    }
-    return render(request, "problems/problem.html", context)
+    return render(request, "problems/problem.html", {"problem": problem})
 
 
 def create(request):
@@ -40,11 +47,9 @@ def create(request):
         # problem fields
         title = request.POST.get("title")
         statement = request.POST.get("statement")
-        time_limit = request.POST.get("time_limit")
-        space_limit = request.POST.get("space_limit")
-        tags = request.POST.get("tags")
-        input_text = request.POST.get("input_text")
-        output_text = request.POST.get("output_text")
+        time_limit = int(request.POST.get("time_limit"))
+        space_limit = int(request.POST.get("space_limit"))
+        tags = request.POST.get("tags", "")
         user_ext = UserExtension.objects.get(user=request.user)
         problem = Problem.objects.create(
             title=title,
@@ -54,12 +59,24 @@ def create(request):
             tags=tags,
             author=user_ext,
         )
-        TestCase.objects.create(
-            problem=problem,
-            tc_number=1,
-            input_text=input_text,
-            output_text=output_text,
-        )
+        i = 0
+        while f"input_text_{i}" in request.POST:
+            i_uid = uuid4()
+            o_uid = uuid4()
+            input_path = resolve_path("input", i_uid)
+            output_path = resolve_path("output", o_uid)
+            with open(input_path, "w") as i_file:
+                i_file.write(request.POST[f"input_text_{i}"].strip())
+            with open(output_path, "w") as o_file:
+                o_file.write(request.POST[f"output_text_{i}"].strip())
+
+            TestCase.objects.create(
+                problem=problem,
+                tc_number=i,
+                input_file=i_uid,
+                output_file=o_uid,
+            )
+            i = i + 1
         return redirect("problems")
     return render(request, "problems/create_problem.html")
 
@@ -73,5 +90,14 @@ def submissions(request):
 
 def submission(request, submission_id):
     submission = get_object_or_404(Submission, id=submission_id)
-    context = {"submission": submission}
+
+    # read code from file
+    code_path = resolve_path("code", submission.code_file, submission.lang)
+    with open(code_path, "r") as f:
+        code = f.read()
+
+    context = {
+        "submission": submission,
+        "code": code,
+    }
     return render(request, "problems/submission.html", context)
