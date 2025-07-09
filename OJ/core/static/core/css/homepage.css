@@ -1,0 +1,222 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Segoe UI', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.cosmic-bg {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    overflow: hidden;
+}
+
+canvas#starfield {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, rgba(0, 0, 50, 0.3), rgba(0, 50, 100, 0.3));
+    backdrop-filter: blur(2px);
+    border-bottom: 1px solid rgb(183, 183, 183);
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.named-logo {
+    height: 80px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.nav-buttons .nav-btn {
+    padding: 12px 24px;
+    font-size: 1.3rem;
+    border: 1px solid #835CFA;
+    border-radius: 6px;
+    background-color: rgba(155, 89, 182, 0.1);
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-buttons .nav-btn:hover {
+    background-color: #835CFA;
+    color: #000;
+    box-shadow: 0 0 12px #835CFA;
+}
+
+.greet-section {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 2px;
+    font-size: 1.7rem;
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.highlight-key {
+    color: #58d68d;
+    font-weight: bold;
+}
+
+.highlight-brand {
+    color: #835CFA;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(131, 92, 250, 0.7)
+}
+
+
+.hero-ai-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 40px;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    flex-basis: 60%;
+    min-width: 300px;
+    padding: 40px 30px 80px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    backdrop-filter: blur(2px);
+    max-width: 900px;
+    margin: auto;
+}
+
+.intro-line {
+    font-size: 1.5rem;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.astro-traits {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #c084fc;
+    min-height: 60px;
+    text-align: center;
+}
+
+
+
+.hero-subtext {
+    font-size: 1.3rem;
+    margin: 0 auto 32px;
+    max-width: 700px;
+    color: #dddddd;
+    line-height: 1.6;
+}
+
+.suit-up-line-text {
+    color: #58d68d;
+    font-weight: bold;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.suit-up-btn-wrap {
+    text-align: center;
+}
+
+.suit-up-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    background: #835CFA;
+    color: #000;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 8px #835CFA;
+    transition: background 0.3s ease;
+}
+
+.suit-up-btn:hover {
+    background: #a084fc;
+    color: #111;
+}
+
+.ai-info-section {
+    flex-basis: 30%;
+    min-width: 300px;
+    padding: 50px 40px;
+    background: linear-gradient(to bottom right, rgba(131, 92, 250, 0.1), rgba(50, 0, 80, 0.18));
+    border: 1px solid rgba(131, 92, 250, 0.4);
+    border-radius: 16px;
+    color: white;
+    min-height: 420px;
+    box-shadow: 0 0 25px rgba(131, 92, 250, 0.2);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.ai-info-section h3 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #bb86fc;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+}
+
+.ai-info-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ai-info-section li {
+    font-size: 1.4rem;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+}
+
+.ai-info-section li:last-child {
+    border-bottom: none;
+}
+
+.feature-cards-section {
+    padding: 100px 40px;
+    background-color: rgba(0, 255, 255, 0.07);
+    /* light cyan overlay */
+    color: white;
+    min-height: 400px;
+}

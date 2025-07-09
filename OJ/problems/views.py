@@ -1,8 +1,10 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from accounts.models import UserExtension
 from ide.utils import resolve_path
 from .judge import judge_submission
+from django.contrib.auth.decorators import login_required, user_passes_test
 from uuid import uuid4
 
 
@@ -15,7 +17,8 @@ def problems(request):
 
 def problem(request, problem_id):
     problem = get_object_or_404(Problem, id=problem_id)
-
+    if not request.user.is_authenticated:
+        return redirect("login")
     if request.method == "POST":
         user_ext = UserExtension.objects.get(user=request.user)
         code = request.POST.get("code")
@@ -36,12 +39,12 @@ def problem(request, problem_id):
             lang=lang,
             verdict=verdict,
         )
-
-        return redirect("submissions")
+        return JsonResponse({"verdict": verdict})
 
     return render(request, "problems/problem.html", {"problem": problem})
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def create(request):
     if request.method == "POST":
         # problem fields
@@ -81,6 +84,7 @@ def create(request):
     return render(request, "problems/create_problem.html")
 
 
+@login_required
 def submissions(request):
     user_ext = UserExtension.objects.get(user=request.user)
     subs = Submission.objects.filter(user=user_ext).order_by("-created_at")
@@ -88,6 +92,7 @@ def submissions(request):
     return render(request, "problems/submissions.html", context)
 
 
+@login_required
 def submission(request, submission_id):
     submission = get_object_or_404(Submission, id=submission_id)
 

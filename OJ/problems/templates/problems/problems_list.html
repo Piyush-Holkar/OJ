@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Problems list</title>
-</head>
+{% block title %}Missions Overview | CodeCosmic{% endblock %}
 
-<body>
-    <h1>Problems List:</h1><br>
-    <ul>
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'problems/css/problems_list.css' %}">
+<section class="problems-list-container">
+    <h1 class="page-heading">Select a Mission 🚀</h1>
+
+    <div class="problem-cards-wrapper">
         {% for problem in problems %}
-        <a href="{% url 'problem' problem.id %}"><li>{{ problem.title }}</li></a>
+        <div class="problem-card">
+            <h2 class="problem-title">{{ problem.title }}</h2>
+            <p class="problem-tags"><span class="tag-label">Tags:</span> {{ problem.tags }}</p>
+            <a href="{% url 'problem' problem.id %}" class="launch-button">🚀 Launch Mission</a>
+        </div>
+        {% empty %}
+        <p class="no-problems-msg">🛰 No missions available at the moment. Please check back later.</p>
         {% endfor %}
-    </ul>
-</body>
-
-</html>
+    </div>
+</section>
+{% endblock %}

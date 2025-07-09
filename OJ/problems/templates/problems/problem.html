@@ -1,69 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ problem.title }}</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 20px;
-            font-family: sans-serif;
-        }
+{% block title %}{{ problem.title }} | CodeCosmic{% endblock %}
 
-        .left-section {
-            width: 50%;
-        }
+{% block content %}
+<link rel="stylesheet" href="{% static 'problems/css/problem.css' %}">
 
-        .right-section {
-            width: 50%;
-        }
+<div class="problem-wrapper">
+    <div class="problem-layout">
+        <div class="problem-left">
+            <div class="left-scroll">
+                <div class="problem-header">
+                    <h1 class="problem-title">{{ problem.title }}</h1>
+                    <button class="ai-btn" id="simplify-btn">✨ Cosmic Clarity</button>
+                </div>
 
-        textarea {
-            width: 100%;
-        }
-    </style>
-</head>
+                <div class="meta-line">
+                    <span class="author">By {{ problem.author.user.username }}</span>
+                    <span class="created">| {{ problem.created_at|date:"d M Y" }}</span>
+                </div>
 
-<body>
-    <div class="left-section">
-        <h1>{{ problem.title }}</h1>
+                <h2 class="section-heading">Mission Objective</h2>
+                <pre class="card-box">{{ problem.statement }}</pre>
 
-        <p><strong>Author:</strong> {{ problem.author.user.username }}</p>
-        <p><strong>Created At:</strong> {{ problem.created_at }}</p>
-        <p><strong>Tags:</strong> {{ problem.tags }}</p>
+                <h2 class="section-heading">Mission Constraints</h2>
+                <pre class="card-box constraint-box">
+Time Limit: {{ problem.time_limit }} ms
+Space Limit: {{ problem.space_limit }} MB
+                </pre>
 
-        <h2>Problem Statement</h2>
-        <pre>{{ problem.statement }}</pre>
+                <div class="tags">
+                    <strong>Tags:</strong> {{ problem.tags }}
+                </div>
+            </div>
+        </div>
 
-        <h3>Constraints</h3>
-        <ul>
-            <li><strong>Time Limit:</strong> {{ problem.time_limit }} ms</li>
-            <li><strong>Space Limit:</strong> {{ problem.space_limit }} MB</li>
-        </ul>
+        <div class="problem-right">
+            <form method="POST" action="{% url 'problem' problem.id %}" class="submission-form">
+                {% csrf_token %}
+                <div class="lang-verdict-row">
+                    <div class="language-line">
+                        <label for="lang">Language:</label>
+                        <select name="lang" id="lang" required>
+                            <option value="cpp">C++</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                            <option value="c">C</option>
+                        </select>
+                    </div>
+                    <div class="status-box" id="verdict">Status: 💤 Idle</div>
+                </div>
+
+                <div class="code-label-row">
+                    <label for="code">Your Code:</label>
+                    <button type="button" class="ai-btn" id="hint-btn" style="display: none;">🛰 Let Universe Give you a
+                        hint</button>
+                </div>
+
+                <textarea name="code" id="code-editor" rows="15" required placeholder="// Start mission code here..."
+                    spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+
+                <button type="submit" id="submit-button">🚀 Launch</button>
+            </form>
+        </div>
     </div>
+</div>
 
-    <div class="right-section">
-        <h2>Submit Your Code</h2>
-        <form method="POST" action="{% url 'problem' problem.id %}">
-            {% csrf_token %}
-
-            <label for="lang">Language:</label>
-            <select name="lang" required>
-                <option value="cpp">C++</option>
-                <option value="python">Python</option>
-                <option value="java">Java</option>
-            </select><br><br>
-
-            <label for="code">Your Code:</label><br>
-            <textarea name="code" rows="15" cols="80" required></textarea><br><br>
-
-            <button type="submit">Submit Code</button>
-        </form>
+<div class="ai-panel" id="ai-panel">
+    <div class="ai-panel-content">
+        <span id="ai-panel-close">X</span>
+        <div id="ai-panel-response">
+            <p>Cosmic response will appear here...</p>
+        </div>
     </div>
-</body>
+</div>
 
-</html>
+<script src="{% static 'problems/js/problem.js' %}"></script>
+{% endblock %}

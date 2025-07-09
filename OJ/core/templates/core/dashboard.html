@@ -1,21 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
+{% load static %}
+{% block title %}Dashboard | CodeCosmic{% endblock %}
 
-<body>
-    <h1>Welcome To Dashboard! </h1>
-    <a href="{% url 'profile' user.username %}"><button type="button">Profile</button></a>
-    <a href="{% url 'problems' %}"><button type="button">Problems List</button></a>
-    <a href="{% url 'submissions' %}"><button type="button">Submissions</button></a>
-    <a href="{% url 'create' %}"><button type="button">Create Problem</button></a>
-    <a href="{% url 'ide' %}"><button type="button">Compiler</button></a>
-    <a href="{% url 'logout' %}"><button type="button">Logout</button></a>
+{% block content %}
+<link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}">
+<section class="dashboard-section">
+    <h1 class="dashboard-heading">Welcome to Mission Control, {{ user.username }} 🛰️</h1>
+    <p class="dashboard-subtext">
+        All systems are green. You're cleared for launch. Here's your current status report:
+    </p>
 
-</body>
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <h3>Missions Completed</h3>
+            <p>{{ user_ext.problems_solved }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Cosmic Rank</h3>
+            <p>#{{ user_ext.rank }}</p>
+        </div>
+    </div>
+</section>
 
-</html>
+
+{% endblock %}

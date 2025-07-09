@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from .compiler import run_code
 from .utils import resolve_path, delete_files
@@ -24,7 +25,7 @@ def ide(request):
             with open(input_path, "w") as f:
                 f.write(input_data)
 
-        context = run_code(
+        result = run_code(
             lang=lang,
             code_uuid=uid,
             input_uuid=uid if input_data.strip() else None,
@@ -34,21 +35,21 @@ def ide(request):
 
         try:
             with open(output_path, "r") as f:
-                context["output"] = f.read()
+                result["output"] = f.read()
         except FileNotFoundError:
-            context["output"] = "(No output)"
+            result["output"] = "(No output)"
 
         try:
             with open(error_path, "r") as f:
-                context["error"] = f.read()
+                result["error"] = f.read()
         except FileNotFoundError:
-            context["error"] = "(No error)"
+            result["error"] = "(No error)"
 
-        additional_cleanup = context.pop("cleanup_paths", [])
+        additional_cleanup = result.pop("cleanup_paths", [])
         delete_files(
             [code_path, input_path, output_path, error_path, *additional_cleanup]
         )
 
-        return render(request, "ide/ide.html", {"context": context})
+        return JsonResponse(result)
 
     return render(request, "ide/ide.html")

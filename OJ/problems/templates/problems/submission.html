@@ -1,22 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submission #{{ submission.id }}</title>
-</head>
+{% block title %}Mission Log #{{ submission.id }} | CodeCosmic{% endblock %}
 
-<body>
-    <h1>Submission Details</h1>
-    <p><strong>Problem:</strong> {{ submission.problem.title }}</p>
-    <p><strong>Submitted By:</strong> {{ submission.user.user.username }}</p>
-    <p><strong>Language:</strong> {{ submission.lang }}</p>
-    <p><strong>Verdict:</strong> {{ submission.verdict }}</p>
-    <p><strong>Submitted At:</strong> {{ submission.created_at }}</p>
+{% block content %}
+<link rel="stylesheet" href="{% static 'problems/css/submission.css' %}">
+<h1 class="page-heading">Mission Log #{{ submission.id }}</h1>
 
-    <h2>Code:</h2>
-    <pre>{{ code }}</pre>
-</body>
+<div class="full-width-wrapper">
 
-</html>
+    <div class="submission-grid">
+        <div class="submission-info">
+            <p><strong>🛰 Mission:</strong> {{ submission.problem.title }}</p><br>
+            <p><strong>🪖 Commander:</strong> {{ submission.user.user.username }}</p><br>
+            <p><strong>🔤 Language:</strong> {{ submission.lang }}</p><br>
+            <p>
+                <strong>📡 Status:</strong>
+                <span class="verdict {{ submission.verdict|lower|slugify }}">
+                    {{ submission.verdict }}
+                </span>
+            </p><br>
+            <p><strong>🚀 Launch Time:</strong> {{ submission.created_at|date:"d M Y, H:i" }}</p>
+        </div>
+
+        <div class="code-section">
+            <h2>📄 Code Transmission</h2>
+            <pre><code>{{ code }}</code></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}

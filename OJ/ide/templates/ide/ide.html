@@ -1,71 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDE: Run Code Online</title>
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 40px;
-        }
+{% block title %}Launchpad | CodeCosmic{% endblock %}
 
-        .form-section {
-            flex: 1;
-        }
+{% block content %}
+<link rel="stylesheet" href="{% static 'ide/css/ide.css' %}">
 
-        .result-section {
-            flex: 1;
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        textarea {
-            width: 100%;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Run Your Code</h1>
-    <div class="container">
-        <div class="form-section">
-            <form method="POST" action="{% url 'ide' %}">
-                {% csrf_token %}
-
-                <label for="language">Language:</label><br>
-                <select name="language" id="language">
-                    <option value="cpp">C++</option>
-                    <option value="python">Python</option>
-                    <option value="java">Java</option>
-                    <option value="c">C</option>
-                </select><br><br>
-
-                <label for="code">Code:</label><br>
-                <textarea name="code" id="code" rows="15">{{ request.POST.code }}</textarea><br><br>
-
-                <label for="input">Input (Enter input if your code accepts it):</label><br>
-                <textarea name="input" id="input" rows="8">{{ request.POST.input }}</textarea><br><br>
-
-                <input type="submit" value="Run Code">
-            </form>
+<section class="ide-container">
+    <div class="ide-topbar">
+        <div class="lang-label">
+            <label for="language-select">Language:</label>
+            <select id="language-select">
+                <option value="cpp">C++</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="c">C</option>
+            </select>
         </div>
-
-        {% if context %}
-        <div class="result-section">
-            <h2>Execution Info:</h2>
-            <pre>
-                {% for key, value in context.items %}
-                {{ key }} : {{ value|safe }}
-                {% endfor %}
-            </pre>
-        </div>
-        {% endif %}
+        <button id="run-button">🚀 Launch</button>
     </div>
-</body>
 
-</html>
+    <div class="ide-main">
+        <div class="code-area">
+            <textarea id="code-editor" placeholder="// Write your code here..." spellcheck="false" autocomplete="off"
+                autocorrect="off" autocapitalize="off"></textarea>
+        </div>
+        <div class="output-area">
+            <div class="output-status">
+                <span id="verdict">Status: 💤 Idle</span>
+                <span id="time-used">⏱ 0.000s</span>
+            </div>
+            <textarea id="input-editor" placeholder="# Optional input..." spellcheck="false" autocomplete="off"
+                autocorrect="off" autocapitalize="off"></textarea>
+            <pre id="output-box">(Output will appear here)</pre>
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'ide/js/ide.js' %}"></script>
+{% endblock %}

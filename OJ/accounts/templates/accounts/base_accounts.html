@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CodeCosmic{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/auth.css' %}">
+</head>
+
+<body>
+    <div class="named-logo-container">
+        <img src="{% static 'assets/named_logo.png' %}" alt="CodeCosmic" class="named-logo" />
+    </div>
+
+    {% block content %}{% endblock %}
+</body>
+
+</html>

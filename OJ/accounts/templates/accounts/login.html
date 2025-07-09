@@ -1,32 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "accounts/base_accounts.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - CodeCosmic</title>
-</head>
+{% block title %}Login - CodeCosmic{% endblock %}
 
-<body>
-    <h1>Login</h1>
-    <form method="POST" action="{% url 'login' %}">
+{% block content %}
+<div class="auth-container">
+    <h2 class="auth-heading">Login</h2>
+
+    {% if messages %}
+    <div class="message-box">
+        {% for message in messages %}
+        <div class="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'login' %}" class="auth-form">
         {% csrf_token %}
 
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br><br>
+        <label for="username">Cosmic ID</label>
+        <input type="text" name="username" required>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br><br>
+        <label for="password">Secret Code</label>
+        <input type="password" name="password" required>
 
-        <label>
-            <input type="checkbox" name="remember_me">
-            Remember me
-        </label><br><br>
+        <div class="remember-me">
+            <input type="checkbox" name="remember_me" id="remember_me">
+            <label for="remember_me">Remember me</label>
+        </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Launch In</button>
     </form>
 
-    <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
-</body>
-
-</html>
+    <p class="switch-link">Don't have an account? <a href="{% url 'register' %}">Suit Up Here</a></p>
+</div>
+{% endblock %}

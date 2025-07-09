@@ -1,40 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "accounts/base_accounts.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - CodeCosmic</title>
-</head>
+{% block title %}Register - CodeCosmic{% endblock %}
 
-<body>
-    <h1>Create New User</h1>
+{% block content %}
+<div class="auth-container">
+    <h2 class="auth-heading">Register</h2>
+
     {% if messages %}
-    <ul>
+    <div class="message-box">
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <div class="alert">{{ message }}</div>
         {% endfor %}
-    </ul>
+    </div>
     {% endif %}
-    <form action="{% url 'register' %}" method="POST">
+
+    <form method="POST" action="{% url 'register' %}" class="auth-form">
         {% csrf_token %}
-        <!-- User fields -->
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br><br>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" required><br><br>
+        <label for="username">Cosmic ID</label>
+        <input type="text" name="username" required>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password"><br><br>
+        <label for="email">Electronic mail Address</label>
+        <input type="email" name="email" required>
 
-        <!-- UserExtension fields -->
-        <label for="college">College:</label>
-        <input type="text" name="college" required><br><br>
+        <label for="password">Secret Code</label>
+        <input type="password" name="password" required>
 
-        <button type="submit">Register</button>
-        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        <label for="college">Base Station (College/University)</label>
+        <input type="text" name="college" required>
+
+        <button type="submit">Suit Up</button>
     </form>
-</body>
 
-</html>
+    <p class="switch-link">Already have an account? <a href="{% url 'login' %}">Launch In Here</a></p>
+</div>
+{% endblock %}

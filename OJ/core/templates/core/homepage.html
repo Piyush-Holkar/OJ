@@ -1,23 +1,72 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeCosmic</title>
+    <link rel="icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to CodeCosmic</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/homepage.css' %}" />
 </head>
 
 <body>
-    <div>
-        <h1>🚀🚀🚀 Weclome to CodeCosmic 🚀🚀🚀</h1>
+    <div class="top-navbar">
+        <div class="nav-left">
+            <img src="{% static 'assets/named_logo.png' %}" alt="CodeCosmic" class="named-logo" />
+        </div>
+        <div class="nav-buttons">
+            <a href="{% url 'login' %}" class="glow-btn nav-btn">🚀Launch In</a>
+            <a href="{% url 'register' %}" class="glow-btn nav-btn">📝Suit Up</a>
+        </div>
     </div>
-    <a href="{% url 'register' %}">
-        <button type="button">Register</button>
-    </a>
-    <br><br>
-    <a href="{% url 'login' %}">
-        <button type="button">Login</button>
-    </a>
+
+    <div class="cosmic-bg">
+        <canvas id="starfield"></canvas>
+
+        <div class="greet-section">
+            <h1>Welcome, <span class="highlight-key">Explorer</span>, to the <span
+                    class="highlight-brand">CodeCosmic</span> Universe.</h1>
+        </div>
+
+        <div class="hero-ai-wrapper">
+
+            <div class="hero-content">
+                <p class="intro-line">Not just solving problems — you're on <b>Missions</b>.</p>
+                <div class="astro-traits"><span id="typed-text"></span></div>
+                <p class="hero-subtext">
+                    Embark on this fun journey through code and cosmos.<br>Progress through missions and write your name
+                    among the stars.
+                </p>
+                <p class="suit-up-line-text">Suit Up Now and start Missions!</p>
+                <div class="suit-up-btn-wrap">
+                    <a href="{% url 'register' %}" class="suit-up-btn">Join the Mission</a>
+                </div>
+            </div>
+
+            <div class="ai-info-section">
+                <div class="ai-info">
+                    <h3>Meet Your AI- "Universe"</h3>
+                    <ul>
+                        <li>Code Review at Lightspeed</li>
+                        <li>Smart Hints on Stuck Missions</li>
+                        <li>Problem Simplifier for Cosmic Clarity</li>
+                        <li>Code Explanation in Human Tongue</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="feature-cards-section">
+            <!-- Feature cards will go here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="{% static 'core/js/homepage.js' %}"></script>
+
 
 </body>
 

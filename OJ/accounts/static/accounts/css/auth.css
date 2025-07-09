@@ -1,0 +1,152 @@
+/* Reset and base styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to bottom right, #0a0a0f, #1b1f3a);
+    font-family: 'Segoe UI', sans-serif;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Named logo on top */
+.named-logo-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.named-logo {
+    height: 120px;
+}
+
+/* Auth form container */
+.auth-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 60px 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    width: 95%;
+    max-width: 550px;
+    animation: floatCard 3s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes floatCard {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Headings */
+.auth-heading {
+    font-size: 2.4rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* Form */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    padding: 14px;
+    margin-bottom: 18px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    font-size: 1.05rem;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #835CFA;
+    background-color: #232343;
+}
+
+/* Remember me */
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    font-size: 0.95rem;
+}
+
+/* Submit Button */
+.auth-form button {
+    background-color: rgba(155, 89, 182, 0.2);
+    color: #fff;
+    border: 1px solid #835CFA;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-form button:hover {
+    background-color: #835CFA;
+    color: #000;
+    box-shadow: 0 0 14px #835CFA;
+}
+
+/* Switch link */
+.switch-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.switch-link a {
+    color: #b084f7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch-link a:hover {
+    text-decoration: underline;
+}
+
+/* Messages */
+.message-box {
+    margin-bottom: 24px;
+}
+
+.alert {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff6b6b;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+}

@@ -1,19 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user.username }}'s Profile - CodeCosmic</title>
-</head>
+{% block title %}{{ user.username }} | AstroCoder Log{% endblock %}
 
-<body>
-    <h1>Profile of {{ user.username }}</h1>
-    <p><b>Email:</b> {{ user.email }}</p>
-    <p><b>College:</b> {{ user_ext.college }}</p>
-    <p><b>Rank:</b> {{ user_ext.rank }}</p>
-    <p><b>Problems Solved:</b> {{ user_ext.problems_solved }}</p>
+{% block content %}
+<link rel="stylesheet" href="{% static 'core/css/profile.css' %}">
 
-</body>
+<section class="profile-container">
+    <h1 class="profile-heading">🧑‍🚀 AstroCoder Log</h1>
 
-</html>
+    <div class="profile-card username-card">
+        <span class="username">Cosmic ID: {{ user.username }}</span>
+        <span class="email">email: {{ user.email }}</span>
+    </div>
+
+    <div class="profile-card full-card">
+        <span class="label">Base Station</span>
+        <span class="value">{{ user_ext.college|default:"Unknown Galaxy" }}</span>
+    </div>
+
+    <div class="stat-row">
+        <div class="profile-card stat-box">
+            <span class="label">Missions Completed</span>
+            <span class="value">{{ user_ext.problems_solved }}</span>
+        </div>
+        <div class="profile-card stat-box">
+            <span class="label">Cosmic Rank</span>
+            <span class="value">#{{ user_ext.rank }}</span>
+        </div>
+    </div>
+    <div class="profile-card full-card">
+        <span class="label">Joined on</span>
+        <span class="value">{{ user.date_joined|date:"d M Y, H:i" }}</span>
+    </div>
+
+    <div class="profile-card full-card">
+        <span class="label">Last Signal Received</span>
+        <span class="value">{{ user.last_login|date:"d M Y, H:i" }}</span>
+    </div>
+
+</section>
+{% endblock %}

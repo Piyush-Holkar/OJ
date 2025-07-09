@@ -1,0 +1,234 @@
+body {
+    margin: 0;
+    background-color: #0e0e1a;
+    font-size: 1rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.problem-wrapper {
+    font-family: 'Fira Code', monospace;
+    padding: 0;
+    flex-grow: 1;
+    min-height: 0;
+    height: 0vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.problem-layout {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    padding: 20px;
+    height: calc(100vh - 60px);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.problem-left,
+.problem-right {
+    flex: 1;
+    background-color: #11111f;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.left-scroll {
+    overflow-y: auto;
+    padding-right: 10px;
+    padding-bottom: 50px;
+}
+
+.problem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.problem-title {
+    font-size: 1.8rem;
+    color: #00ffcc;
+}
+
+.meta-line {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 16px;
+}
+
+.section-heading {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    color: #9fdfdf;
+}
+
+.card-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.constraint-box {
+    text-align: left;
+    line-height: 1.6;
+}
+
+.tags {
+    margin-top: 20px;
+    color: #bbb;
+    font-size: 0.95rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 10px;
+}
+
+.submission-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.lang-verdict-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.language-line label {
+    margin-right: 8px;
+}
+
+
+#lang {
+    background-color: #1c1c2a;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.code-label-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 8px 4px;
+}
+
+.code-label-row label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+#code-editor {
+    flex-grow: 1;
+    resize: none;
+    margin: 4px;
+    background-color: #1c1c2a;
+    color: #00ffcc;
+    border: none;
+    padding: 16px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-family: 'Fira Code', monospace;
+    white-space: pre;
+    overflow: auto;
+    margin-bottom: 12px;
+}
+
+.status-box {
+    font-size: 1.5rem;
+    color: #cccccc;
+    margin-left: 30px;
+    white-space: nowrap;
+}
+
+#submit-button {
+    background-color: #8e44ad;
+    color: white;
+    margin: 4px;
+    padding: 12px 18px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#submit-button:hover {
+    background-color: #a569bd;
+    box-shadow: 0 0 10px #a569bd, 0 0 20px #a569bd;
+}
+
+/* AI */
+
+.ai-btn {
+    background-color: #1f1f30;
+    color: #00ffcc;
+    border: 1px solid #00ffcc;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin-top: 6px;
+}
+
+.ai-btn:hover {
+    background-color: #00ffcc;
+    color: #0e0e1a;
+}
+
+.ai-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    max-width: 90%;
+    height: 100%;
+    background-color: #0e0e1a;
+    box-shadow: -2px 0 10px rgba(0, 255, 204, 0.3);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.ai-panel.active {
+    transform: translateX(0);
+}
+
+.ai-panel-content {
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+    color: #ffffff;
+    font-family: 'Fira Code', monospace;
+}
+
+#ai-panel-close {
+    font-size: 1.4rem;
+    float: right;
+    cursor: pointer;
+    color: #ff5e57;
+}
+
+#ai-panel-response {
+    margin-top: 40px;
+    font-size: 1rem;
+    white-space: pre-wrap;
+}

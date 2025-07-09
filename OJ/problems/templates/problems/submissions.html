@@ -1,24 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submissions</title>
-</head>
+{% block title %}Launch History | CodeCosmic{% endblock %}
 
-<body>
-    <h1>Your Submissions:</h1><br>
-    <ul>
-        {% for submission in submissions %}
-        <li>
-            <a href="{% url 'submission' submission.id %}">
-                {{ submission.problem.title }} — {{ submission.verdict }} (Language-{{ submission.lang }})
-                {{ submission.created_at }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
+{% block content %}
+<link rel="stylesheet" href="{% static 'problems/css/submissions.css' %}">
 
-</html>
+<section class="submissions-container">
+    <h1 class="page-heading">Launch History 📜</h1>
+
+    {% if submissions %}
+    <table class="submissions-table">
+        <thead>
+            <tr>
+                <th>Mission</th>
+                <th>Status</th>
+                <th>Language</th>
+                <th>Launched On</th>
+                <th>Mission Logs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sub in submissions %}
+            <tr class="submission-row {{ sub.verdict|lower|slugify }}">
+                <td>{{ sub.problem.title }}</td>
+                <td class="verdict {{ sub.verdict|lower|slugify }}">
+                    {{ sub.verdict }}
+                </td>
+                <td>{{ sub.lang }}</td>
+                <td>{{ sub.created_at|date:"d M Y, H:i" }}</td>
+                <td>
+                    <a href="{% url 'submission' sub.id %}" class="view-btn">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-submissions-msg">No launch logs available. Try submitting your first mission!</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load static %}
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="{% url 'dashboard' %}">
+            <img src="{% static 'assets/named_logo.png' %}" alt="logo" class="navbar-logo">
+        </a>
+
+
+        <div class="navbar-links">
+            <a href="{% url 'problems' %}">Missions</a>
+            <a href="{% url 'submissions' %}">Launch History</a>
+            <a href="{% url 'ide' %}">Code Launcher</a>
+        </div>
+    </div>
+
+    <div class="navbar-right">
+        <div class="dropdown-container">
+            <button class="dropdown-btn">Welcome aboard {{ user.username }} ▼</button>
+            <div class="dropdown-menu">
+                <a href="{% url 'profile' user.username %}">AstroCoder Log</a>
+                <a href="{% url 'logout' %}" style="background-color: #e74c3c; color: white; font-weight: 600;">
+                    Eject
+                </a>
+
+            </div>
+        </div>
+    </div>
+</nav>
