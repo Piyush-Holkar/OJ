@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function showAIPanel(text) {
-        aiResponse.textContent = text;
+        aiResponse.innerHTML = marked.parse(text);
         aiPanel.classList.add("active");
     }
 
@@ -106,4 +106,16 @@ document.addEventListener("DOMContentLoaded", () => {
             .find(c => c.trim().startsWith("csrftoken="));
         return cookie ? cookie.split("=")[1] : "";
     }
+    [codeEditor].forEach(editor => {
+        editor.addEventListener("keydown", (e) => {
+            if (e.key === "Tab") {
+                e.preventDefault();
+                const start = editor.selectionStart;
+                const end = editor.selectionEnd;
+                editor.value = editor.value.substring(0, start) + "\t" + editor.value.substring(end);
+                editor.selectionStart = editor.selectionEnd = start + 1;
+            }
+        });
+    });
+
 });

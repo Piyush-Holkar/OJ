@@ -12,7 +12,8 @@
             <div class="left-scroll">
                 <div class="problem-header">
                     <h1 class="problem-title">{{ problem.title }}</h1>
-                    <button class="ai-btn" id="simplify-btn">✨ Cosmic Clarity</button>
+                    <button class="ai-btn" title="Simplify the problem statement!" id="simplify-btn">✨ Cosmic
+                        Clarity</button>
                 </div>
 
                 <div class="meta-line">
@@ -42,11 +43,11 @@ Space Limit: {{ problem.space_limit }} MB
                     <div class="language-line">
                         <label for="lang">Language:</label>
                         <select name="lang" id="lang" required>
-                            <option value="cpp">C++</option>
-                            <option value="python">Python</option>
-                            <option value="java">Java</option>
-                            <option value="c">C</option>
+                            {% for lang in languages %}
+                            <option value="{{ lang }}">{{ lang }}</option>
+                            {% endfor %}
                         </select>
+
                     </div>
                     <div class="status-box" id="verdict">Status: 💤 Idle</div>
                 </div>
@@ -74,6 +75,6 @@ Space Limit: {{ problem.space_limit }} MB
         </div>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="{% static 'problems/js/problem.js' %}"></script>
 {% endblock %}

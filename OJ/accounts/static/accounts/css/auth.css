@@ -144,9 +144,20 @@ html {
 }
 
 .alert {
-    background-color: rgba(255, 0, 0, 0.1);
-    color: #ff6b6b;
     padding: 12px;
     border-radius: 6px;
     font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+/* Error messages */
+.alert.error {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff6b6b;
+}
+
+/* Success messages */
+.alert.success {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: #2ecc71;
 }

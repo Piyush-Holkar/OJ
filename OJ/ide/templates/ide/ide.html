@@ -10,12 +10,12 @@
     <div class="ide-topbar">
         <div class="lang-label">
             <label for="language-select">Language:</label>
-            <select id="language-select">
-                <option value="cpp">C++</option>
-                <option value="python">Python</option>
-                <option value="java">Java</option>
-                <option value="c">C</option>
+            <select id="language-select" name="lang" required>
+                {% for lang in languages %}
+                <option value="{{ lang }}">{{lang}}</option>
+                {% endfor %}
             </select>
+
         </div>
         <button id="run-button">🚀 Launch</button>
     </div>

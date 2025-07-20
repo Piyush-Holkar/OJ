@@ -9,7 +9,7 @@
     {% if messages %}
     <div class="message-box">
         {% for message in messages %}
-        <div class="alert">{{ message }}</div>
+        <div class="alert {{ message.tags }}">{{ message }}</div>
         {% endfor %}
     </div>
     {% endif %}

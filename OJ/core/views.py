@@ -9,6 +9,8 @@ from django.http import JsonResponse
 import google.generativeai as genai
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_POST
 
 
 # Create your views here.
@@ -40,16 +42,29 @@ def profile(request, username):
     return render(request, "core/profile.html", context)
 
 
-load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# AI prompts
+PROMPT_SIMPLIFY = (
+    "Break down this coding problem in simple words, like you're explaining to a beginner. "
+    "Keep it short and clear:\n\n{}"
+)
 
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.http import require_POST
+PROMPT_HINT = (
+    "Give a very short (max 5 lines) coding hint for solving this problem. "
+    "Do not reveal the full solution, only nudge the thought process:\n\n{}"
+)
+
+PROMPT_REVIEW = (
+    "Here is a coding problem followed by a submitted solution. "
+    "First, give a score out of 10 for the code. Then provide suggestions if any to improve code quality, readability, or logic. "
+    "If the code is already good, say so clearly. Make it short without skipping important points like code quality, readability.\n\nProblem:\n{}\n\nCode:\n{}"
+)
 
 
 @require_POST
 @csrf_protect
 def AI(request):
+    load_dotenv()
+    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     try:
         body = json.loads(request.body)
         action = body.get("action")
@@ -59,17 +74,17 @@ def AI(request):
         model = genai.GenerativeModel("gemini-2.0-flash")
 
         if action == "simplify":
-            prompt = f"Explain this coding problem simply:\n\n{statement}"
+            prompt = PROMPT_SIMPLIFY.format(statement)
         elif action == "hint":
             if not statement.strip():
                 return JsonResponse(
                     {"error": "Empty problem statement for hint"}, status=400
                 )
-            prompt = f"Give a helpful coding hint for this problem:\n\n{statement}"
+            prompt = PROMPT_HINT.format(statement)
         elif action == "review":
             if not code.strip():
                 return JsonResponse({"error": "Empty code for review"}, status=400)
-            prompt = f"Review this submitted code and provide improvement suggestions:\n\n{code}"
+            prompt = PROMPT_REVIEW.format(statement, code)
         else:
             return JsonResponse({"error": "Invalid action"}, status=400)
 

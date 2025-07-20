@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Print Hello World",
+    "statement": "Write a program that prints 'Hello, World!'",
+    "time_limit": 1,
+    "space_limit": 256,
+    "tags": "intro strings",
+    "testcases": [
+      {
+        "input": "",
+        "output": "Hello, World!"
+      }
+    ]
+  },
+  {
+    "title": "Add Two Numbers",
+    "statement": "Read two integers and print their sum.",
+    "time_limit": 1,
+    "space_limit": 256,
+    "tags": "math easy",
+    "testcases": [
+      {
+        "input": "3 4",
+        "output": "7"
+      },
+      {
+        "input": "100 200",
+        "output": "300"
+      }
+    ]
+  }
+]

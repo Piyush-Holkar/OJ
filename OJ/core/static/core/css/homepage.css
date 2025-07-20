@@ -213,10 +213,12 @@ canvas#starfield {
     border-bottom: none;
 }
 
-.feature-cards-section {
-    padding: 100px 40px;
-    background-color: rgba(0, 255, 255, 0.07);
-    /* light cyan overlay */
-    color: white;
-    min-height: 400px;
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #ccc;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: auto;
+    width: 100%;
 }

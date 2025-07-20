@@ -25,20 +25,16 @@ CODES_DIR = os.path.join(RUNTIME_DIR, "codes")
 INPUTS_DIR = os.path.join(RUNTIME_DIR, "inputs")
 OUTPUTS_DIR = os.path.join(RUNTIME_DIR, "outputs")
 
-# Gemini api key setup
 load_dotenv()
+
+# Security settings
+SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-dev-secret-key")
+DEBUG = os.getenv("DEBUG", "True") == "True"
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+
+# Gemini API key
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-(=g2si9e#m$mhl#*h@)l_$-946i79pkt0g*$@44k%d^@g0i-^d"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -133,10 +129,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

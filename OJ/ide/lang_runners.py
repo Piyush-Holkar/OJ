@@ -144,3 +144,4 @@ def run_python(
         "verdict": verdict,
         "time_used": f"{round(execution_time, 3)} seconds",
     }
+

@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from .compiler import run_code
+from .lang_support import extension_map
 from .utils import resolve_path, delete_files
 import uuid
 
@@ -41,7 +42,9 @@ def ide(request):
 
         try:
             with open(error_path, "r") as f:
-                result["error"] = f.read()
+                # result["error"] = f.read()
+                result["error"] = result["verdict"]
+
         except FileNotFoundError:
             result["error"] = "(No error)"
 
@@ -51,5 +54,5 @@ def ide(request):
         )
 
         return JsonResponse(result)
-
-    return render(request, "ide/ide.html")
+    context = {"languages": list(extension_map.keys())}
+    return render(request, "ide/ide.html", context)

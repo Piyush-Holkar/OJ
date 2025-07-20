@@ -4,6 +4,7 @@ from .models import *
 from accounts.models import UserExtension
 from ide.utils import resolve_path
 from .judge import judge_submission
+from ide.lang_support import extension_map
 from django.contrib.auth.decorators import login_required, user_passes_test
 from uuid import uuid4
 
@@ -17,8 +18,10 @@ def problems(request):
 
 def problem(request, problem_id):
     problem = get_object_or_404(Problem, id=problem_id)
+
     if not request.user.is_authenticated:
         return redirect("login")
+
     if request.method == "POST":
         user_ext = UserExtension.objects.get(user=request.user)
         code = request.POST.get("code")
@@ -32,6 +35,11 @@ def problem(request, problem_id):
 
         verdict = judge_submission(problem, lang, code_uuid)
 
+        already_solved = Submission.objects.filter(
+            user=user_ext,
+            problem=problem,
+            verdict="Success",
+        ).exists()
         Submission.objects.create(
             problem=problem,
             user=user_ext,
@@ -39,9 +47,17 @@ def problem(request, problem_id):
             lang=lang,
             verdict=verdict,
         )
+        if verdict == "Success" and not already_solved:
+            user_ext.problems_solved += 1
+            user_ext.save()
+
         return JsonResponse({"verdict": verdict})
 
-    return render(request, "problems/problem.html", {"problem": problem})
+    context = {
+        "problem": problem,
+        "languages": list(extension_map.keys()),
+    }
+    return render(request, "problems/problem.html", context)
 
 
 @user_passes_test(lambda u: u.is_superuser)

@@ -14,7 +14,7 @@ def register_user(request):
         college = request.POST.get("college")
 
         if User.objects.filter(username=username).exists():
-            messages.info(request, "Username already taken.")
+            messages.error(request, "Username already taken.")
             return render(request, "accounts/register.html")
 
         user = User.objects.create_user(
@@ -23,7 +23,7 @@ def register_user(request):
 
         u_extension = UserExtension(user=user, college=college)
         u_extension.save()
-        messages.info(request, "Registration successful!")
+        messages.success(request, "Registration successful!")
         return redirect("login")
 
     return render(request, "accounts/register.html")
@@ -38,11 +38,11 @@ def login_user(request):
         remember_me = request.POST.get("remember_me") == "on"
 
         if not User.objects.filter(username=username).exists():
-            messages.info(request, "Username does not exist")
+            messages.error(request, "Username does not exist")
             return redirect("login")
         user = authenticate(username=username, password=password)
         if user is None:
-            messages.info(request, "Invalid password")
+            messages.error(request, "Invalid password")
             return redirect("login")
 
         if remember_me:

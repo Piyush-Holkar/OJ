@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Databse
-*.sqlite3
+*/*.sqlite3
 
 
 # Django
@@ -20,5 +20,11 @@ __pycache__/
 *.env
 
 # runtime files
-runtime_files
+*/runtime_files
 
+# static files
+*/staticfiles
+
+#source control
+.git
+.gitignore
