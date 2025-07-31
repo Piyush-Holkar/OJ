@@ -1,4 +1,4 @@
-# seed from json 
+# seed from json
 import os
 import django
 import json
@@ -9,10 +9,11 @@ django.setup()
 
 from problems.models import Problem, TestCase
 from accounts.models import UserExtension
+from OJ.settings import BASE_DIR
 from ide.utils import resolve_path
 
 ADMIN_USERNAME = "admin"
-JSON_FILE = os.path.join("fixtures", "problems.json")
+JSON_FILE = os.path.join(BASE_DIR, "fixtures", "problems.json")
 
 try:
     admin_user_ext = UserExtension.objects.get(user__username=ADMIN_USERNAME)

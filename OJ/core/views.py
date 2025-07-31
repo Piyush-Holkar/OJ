@@ -56,7 +56,7 @@ PROMPT_HINT = (
 PROMPT_REVIEW = (
     "Here is a coding problem followed by a submitted solution. "
     "First, give a score out of 10 for the code. Then provide suggestions if any to improve code quality, readability, or logic. "
-    "If the code is already good, say so clearly. Make it short without skipping important points like code quality, readability.\n\nProblem:\n{}\n\nCode:\n{}"
+    "If the code is already good, say so clearly. Make it short without skipping important points like code quality, readability, time and space complexity.\n\nProblem:\n{}\n\nCode:\n{}"
 )
 
 

@@ -1,31 +1,203 @@
 [
   {
-    "title": "Print Hello World",
-    "statement": "Write a program that prints 'Hello, World!'",
-    "time_limit": 1,
+    "title": "Launch Greeting",
+    "statement": "Write a program that prints 'Mission Ready: Hello, Cosmos!'.\n\nInput:\nNo input required.\n\nOutput:\nPrint 'Mission Ready: Hello, Cosmos!'.\n",
+    "time_limit": 1000,
     "space_limit": 256,
-    "tags": "intro strings",
+    "tags": "basic",
     "testcases": [
       {
         "input": "",
-        "output": "Hello, World!"
+        "output": "Mission Ready: Hello, Cosmos!"
       }
     ]
   },
   {
-    "title": "Add Two Numbers",
-    "statement": "Read two integers and print their sum.",
-    "time_limit": 1,
+    "title": "Engine Fuel Check",
+    "statement": "Read two integers representing fuel levels in Engine A and Engine B. Print their total to ensure the spacecraft can launch.\n\nInput:\nTwo integers A and B on a single line.\n\nOutput:\nPrint A+B.\n\nExample:\nInput:\n500 700\nOutput:\n1200",
+    "time_limit": 1000,
     "space_limit": 256,
-    "tags": "math easy",
+    "tags": "maths",
     "testcases": [
       {
-        "input": "3 4",
-        "output": "7"
+        "input": "500 700",
+        "output": "1200"
       },
       {
-        "input": "100 200",
+        "input": "1000 2000",
+        "output": "3000"
+      },
+      {
+        "input": "0 1500",
+        "output": "1500"
+      }
+    ]
+  },
+  {
+    "title": "Oxygen Supply Remaining",
+    "statement": "Given the total oxygen in liters and the current usage rate per hour, compute how many full hours the oxygen will last.\n\nInput:\nTwo integers T and R on a single line, where T is total oxygen and R is usage rate per hour.\n\nOutput:\nPrint the number of full hours (integer division) the oxygen will last.\n\nExample:\nInput:\n1000 100\nOutput:\n10",
+    "time_limit": 1000,
+    "space_limit": 256,
+    "tags": "maths",
+    "testcases": [
+      {
+        "input": "1000 100",
+        "output": "10"
+      },
+      {
+        "input": "900 75",
+        "output": "12"
+      },
+      {
+        "input": "800 200",
+        "output": "4"
+      }
+    ]
+  },
+  {
+    "title": "Thruster Code Match",
+    "statement": "Read a launch code and print 'Access Granted' if it matches 'COSMO2025', else print 'Access Denied'.\n\nInput:\nA single string (launch code).\n\nOutput:\nPrint 'Access Granted' or 'Access Denied'.\n\nExample:\nInput:\nCOSMO2025\nOutput:\nAccess Granted",
+    "time_limit": 1000,
+    "space_limit": 256,
+    "tags": "strings",
+    "testcases": [
+      {
+        "input": "COSMO2025",
+        "output": "Access Granted"
+      },
+      {
+        "input": "cosmo2025",
+        "output": "Access Denied"
+      },
+      {
+        "input": "GALAXY99",
+        "output": "Access Denied"
+      }
+    ]
+  },
+  {
+    "title": "Satellite Uplink",
+    "statement": "Read a message string and repeat it 3 times to simulate signal amplification.\n\nInput:\nA single string message.\n\nOutput:\nPrint the message repeated 3 times without spaces.\n\nExample:\nInput:\nSignal\nOutput:\nSignalSignalSignal",
+    "time_limit": 1000,
+    "space_limit": 256,
+    "tags": "strings",
+    "testcases": [
+      {
+        "input": "Signal",
+        "output": "SignalSignalSignal"
+      },
+      {
+        "input": "Hello",
+        "output": "HelloHelloHello"
+      },
+      {
+        "input": "Data",
+        "output": "DataDataData"
+      }
+    ]
+  },
+  {
+    "title": "Module Weight Calculator",
+    "statement": "Each module weighs 250 kg. Given number of modules, calculate total spacecraft weight.\n\nInput:\nA single integer N (number of modules).\n\nOutput:\nPrint the total weight (N*250).\n\nExample:\nInput:\n4\nOutput:\n1000",
+    "time_limit": 1000,
+    "space_limit": 256,
+    "tags": "maths",
+    "testcases": [
+      {
+        "input": "4",
+        "output": "1000"
+      },
+      {
+        "input": "0",
+        "output": "0"
+      },
+      {
+        "input": "10",
+        "output": "2500"
+      }
+    ]
+  },
+  {
+    "title": "Temperature Stabilizer",
+    "statement": "Convert given temperature from Celsius to Kelvin. (K = C + 273)\n\nInput:\nA single integer C (temperature in Celsius).\n\nOutput:\nPrint the temperature in Kelvin.\n\nExample:\nInput:\n27\nOutput:\n300",
+    "time_limit": 1000,
+    "space_limit": 256,
+    "tags": "maths",
+    "testcases": [
+      {
+        "input": "27",
         "output": "300"
+      },
+      {
+        "input": "0",
+        "output": "273"
+      },
+      {
+        "input": "-73",
+        "output": "200"
+      }
+    ]
+  },
+  {
+    "title": "Navigation Angle",
+    "statement": "Given two angles, compute the absolute difference for navigation correction.\n\nInput:\nTwo integers A and B (angles) on a single line.\n\nOutput:\nPrint the absolute difference |A-B|.\n\nExample:\nInput:\n90 30\nOutput:\n60",
+    "time_limit": 1000,
+    "space_limit": 256,
+    "tags": "maths",
+    "testcases": [
+      {
+        "input": "90 30",
+        "output": "60"
+      },
+      {
+        "input": "360 10",
+        "output": "350"
+      },
+      {
+        "input": "180 180",
+        "output": "0"
+      }
+    ]
+  },
+  {
+    "title": "Cargo Space Left",
+    "statement": "Given total cargo space and used space in kg, compute how much is left.\n\nInput:\nTwo integers T and U on a single line, where T is total space and U is used space.\n\nOutput:\nPrint T-U.\n\nExample:\nInput:\n5000 3000\nOutput:\n2000",
+    "time_limit": 1000,
+    "space_limit": 256,
+    "tags": "maths",
+    "testcases": [
+      {
+        "input": "5000 3000",
+        "output": "2000"
+      },
+      {
+        "input": "2000 2000",
+        "output": "0"
+      },
+      {
+        "input": "1000 750",
+        "output": "250"
+      }
+    ]
+  },
+  {
+    "title": "Alien Signal Scanner",
+    "statement": "Given a string message, count how many times the letter 'A' (case insensitive) appears.\n\nInput:\nA single string message.\n\nOutput:\nPrint the count of 'A' and 'a'.\n\nExample:\nInput:\nAAAaaa\nOutput:\n6",
+    "time_limit": 1000,
+    "space_limit": 256,
+    "tags": "strings",
+    "testcases": [
+      {
+        "input": "AAAaaa",
+        "output": "6"
+      },
+      {
+        "input": "Galaxy",
+        "output": "2"
+      },
+      {
+        "input": "Rocket",
+        "output": "0"
       }
     ]
   }

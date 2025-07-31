@@ -7,6 +7,8 @@ from .models import UserExtension
 
 # Create your views here.
 def register_user(request):
+    if request.user.is_authenticated:
+        return redirect("dashboard")
     if request.method == "POST":
         username = request.POST.get("username")
         email = request.POST.get("email")
@@ -25,7 +27,6 @@ def register_user(request):
         u_extension.save()
         messages.success(request, "Registration successful!")
         return redirect("login")
-
     return render(request, "accounts/register.html")
 
 
@@ -51,8 +52,7 @@ def login_user(request):
             request.session.set_expiry(0)
 
         login(request, user)
-        return redirect("dashboard")
-
+        return redirect("dashboard")    
     return render(request, "accounts/login.html")
 
 

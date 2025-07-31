@@ -1,35 +1,27 @@
-# STAGE 1: Build stage
-FROM python:3.12-slim as build
-
-ENV PYTHONUNBUFFERED=1
-
-# Install build dependencies
-RUN apt update && apt install -y \
-    gcc g++ libffi-dev libssl-dev python3-dev
-
-WORKDIR /app
-
-COPY . /app
-
-# Install dependencies into a temp dir
-RUN pip install --prefix=/install --no-cache-dir -r requirements.txt
-
-
-# STAGE 2: Final runtime image
-
 FROM python:3.12-slim
 
 ENV PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=OJ.settings
 
-# Only installing required runtime packages
-RUN apt update && apt install -y g++
+# Install system packages
+RUN apt update && apt install -y --no-install-recommends \
+    gcc g++ libffi-dev libssl-dev python3-dev \
+ && apt clean && rm -rf /var/lib/apt/lists/*
 
+# Set working directory
 WORKDIR /app
 
-COPY --from=build /install /usr/local
+# Copy entire project
 COPY . /app
 
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set entrypoint permissions
+RUN chmod +x /app/entrypoint.sh
+
+# Expose port
 EXPOSE 8000
-COPY entrypoint.sh /app/entrypoint.sh
+
+# Start with entrypoint
 ENTRYPOINT ["/app/entrypoint.sh"]
